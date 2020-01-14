@@ -5,8 +5,8 @@
 		<meta charset="UTF-8">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script>
-			const cName = "canvas"
-			const offset = 50;
+			const cName = "canvas";
+			const offset = 0;
 
 			function drawPoly(p1,p2,p3,p4,p5,p6) {
 				canvas = $('#'.concat(cName)).html();
@@ -21,9 +21,9 @@
 				canvas = $('#'.concat(cName)).html();
 				line = '<line x1="'.concat(offset,'" y1="', maxDist + offset,'" x2="',offset,'" y2="', -1 * maxDist + offset,'" style="stroke: rgb(255, 0, 0); stroke - width: 2"/>');
 				canvas = canvas.concat(line);
-				line = '<line x1="'.concat(coord(maxDist) + offset,'" y1="', coord(maxDist) + offset,'" x2="',-1 * coord(maxDist) + offset,'" y2="', -1 * coord(maxDist) + offset,'" style="stroke: rgb(255, 0, 0); stroke - width: 2"/>');
+				line = '<line x1="'.concat(xcoord(maxDist) + offset,'" y1="', ycoord(maxDist) + offset,'" x2="',-1 * xcoord(maxDist) + offset,'" y2="', -1 * ycoord(maxDist) + offset,'" style="stroke: rgb(255, 0, 0); stroke - width: 2"/>');
 				canvas = canvas.concat(line);
-				line = '<line x1="'.concat(-1 * coord(maxDist) + offset,'" y1="', coord(maxDist) + offset,'" x2="',coord(maxDist) + offset,'" y2="', -1 * coord(maxDist) + offset,'" style="stroke: rgb(255, 0, 0); stroke - width: 2"/>');
+				line = '<line x1="'.concat(-1 * xcoord(maxDist) + offset,'" y1="', ycoord(maxDist) + offset,'" x2="',xcoord(maxDist) + offset,'" y2="', -1 * ycoord(maxDist) + offset,'" style="stroke: rgb(255, 0, 0); stroke - width: 2"/>');
 				canvas = canvas.concat(line);
 				line = '<circle cx="'.concat(offset,'" cy="',offset,'" r="',maxDist,'" style="fill:rgba(0,0,255,0.25);stroke:purple;stroke-width:1"/>');
 				canvas = canvas.concat(line);
@@ -35,12 +35,15 @@
 				drawGrid(offset);
 			}
 
-			function coord(d){
-				return((d / Math.sqrt(2)));
+			function xcoord(d){
+				return((d * Math.sqrt(3)) / 2);
+			}
+			
+			function ycoord(d){
+				return(d / 2);
 			}
 
-			$(document).ready(function(){
-
+			function updateDraw(){
 				d1 = parseInt($('#1').val());
 				d2 = parseInt($('#2').val());
 				d3 = parseInt($('#3').val());
@@ -48,25 +51,22 @@
 				d5 = parseInt($('#5').val());
 				d6 = parseInt($('#6').val());
 				clearCanvas();
-				drawPoly([offset,d1 + offset],[coord(d2) + offset,coord(d2) + offset],[coord(d3) + offset,-1 * coord(d3) + offset],[0 + offset,-1 * d4 + offset],[-1 * coord(d5) + offset,-1 * coord(d5) + offset],[-1 * coord(d6) + offset,coord(d6) + offset]);
-				
+				drawPoly([offset, d1 + offset], [xcoord(d2) + offset, ycoord(d2) + offset], [xcoord(d3) + offset, -1 * ycoord(d3) + offset], [0 + offset, -1 * d4 + offset], [-1 * xcoord(d5) + offset, -1 * ycoord(d5) + offset], [-1 * xcoord(d6) + offset, ycoord(d6) + offset]);
+			}
+
+			$(document).ready(function(){
+
+				updateDraw();
 				$('input').change(function(){
-					d1 = parseInt($('#1').val());
-					d2 = parseInt($('#2').val());
-					d3 = parseInt($('#3').val());
-					d4 = parseInt($('#4').val());
-					d5 = parseInt($('#5').val());
-					d6 = parseInt($('#6').val());
-					clearCanvas();
-					drawPoly([offset,d1 + offset],[coord(d2) + offset,coord(d2) + offset],[coord(d3) + offset,-1 * coord(d3) + offset],[0 + offset,-1 * d4 + offset],[-1 * coord(d5) + offset,-1 * coord(d5) + offset],[-1 * coord(d6) + offset,coord(d6) + offset]);
+					updateDraw();
 				});
 
 			});
 		</script>
 		<style>
 			#canvas{
-				width: 100px;
-				height: 100px;
+				width: 200px;
+				height: 200px;
 			}
 		</style>
 	</head>
@@ -79,6 +79,6 @@
 			<input id="5" type="range" min="0" max="50" step="10"/><br>
 			<input id="6" type="range" min="0" max="50" step="10"/><br>
 		</div>
-		<svg id="canvas"></svg>
+		<svg id="canvas" viewBox="-51 -51 102 102"></svg>
 	</body>
 </html>
