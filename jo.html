@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>jo</title>
+		<meta charset="UTF-8">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script>
+			const cName = "canvas"
+
+			function drawPoly(p1,p2,p3,p4,p5,p6) {
+				canvas = $('#'.concat(cName)).html();
+				points = ''.concat(p1[0],',',p1[1],' ',p2[0],',',p2[1],' ',p3[0],',',p3[1],' ',p4[0],',',p4[1],' ',p5[0],',',p5[1],' ',p6[0],',',p6[1]);
+				poly = '<polygon points="'.concat(points,'" style="fill:lime;stroke:purple;stroke-width:1"/>');
+				canvas = canvas.concat(poly);
+				$('#canvas').html(canvas);
+			};
+
+			function clearCanvas() {
+				$('#'.concat(cName)).html('');
+			}
+
+			$(document).ready(function(){
+				drawPoly([100,100],[200,100],[200,200],[300,300],[100,200],[0,0]);
+			});
+		</script>
+		<style>
+			#canvas{
+				width: 500px;
+				height: 500px;
+				border: 1px solid black;
+				border-radius: 5px;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			<input id="p1x" type="range" min="0" max="500"/>
+			<input id="p1y" type="range" min="0" max="500"/><br>
+			<input id="p2x" type="range" min="0" max="500"/>
+			<input id="p2y" type="range" min="0" max="500"/><br>
+			<input id="p3x" type="range" min="0" max="500"/>
+			<input id="p3y" type="range" min="0" max="500"/><br>
+			<input id="p4x" type="range" min="0" max="500"/>
+			<input id="p4y" type="range" min="0" max="500"/><br>
+			<input id="p5x" type="range" min="0" max="500"/>
+			<input id="p5y" type="range" min="0" max="500"/><br>
+			<input id="p6x" type="range" min="0" max="500"/>
+			<input id="p6y" type="range" min="0" max="500"/><br>
+		</div>
+		<svg id="canvas"></svg>
+	</body>
+</html>
