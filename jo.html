@@ -17,7 +17,7 @@
 			};
 			
 			function drawGrid(offset) {
-				maxDist = 50
+				maxDist = 60
 				canvas = $('#'.concat(cName)).html();
 				line = '<line x1="'.concat(offset,'" y1="', maxDist + offset,'" x2="',offset,'" y2="', -1 * maxDist + offset,'" style="stroke: rgb(255, 0, 0); stroke - width: 2"/>');
 				canvas = canvas.concat(line);
@@ -50,6 +50,12 @@
 				d4 = parseInt($('#4').val());
 				d5 = parseInt($('#5').val());
 				d6 = parseInt($('#6').val());
+				$('#1val').text(d1/10);
+				$('#2val').text(d2/10);
+				$('#3val').text(d3/10);
+				$('#4val').text(d4/10);
+				$('#5val').text(d5/10);
+				$('#6val').text(d6/10);
 				clearCanvas();
 				drawPoly([offset, d1 + offset], [xcoord(d2) + offset, ycoord(d2) + offset], [xcoord(d3) + offset, -1 * ycoord(d3) + offset], [0 + offset, -1 * d4 + offset], [-1 * xcoord(d5) + offset, -1 * ycoord(d5) + offset], [-1 * xcoord(d6) + offset, ycoord(d6) + offset]);
 			}
@@ -72,13 +78,13 @@
 	</head>
 	<body>
 		<div>
-			<input id="1" type="range" min="0" max="50" step="10"/><br>
-			<input id="2" type="range" min="0" max="50" step="10"/><br>
-			<input id="3" type="range" min="0" max="50" step="10"/><br>
-			<input id="4" type="range" min="0" max="50" step="10"/><br>
-			<input id="5" type="range" min="0" max="50" step="10"/><br>
-			<input id="6" type="range" min="0" max="50" step="10"/><br>
+			<input id="1" type="range" min="10" max="50" step="10"/><span id="1val"></span><br>
+			<input id="2" type="range" min="10" max="50" step="10"/><span id="2val"></span><br>
+			<input id="3" type="range" min="10" max="50" step="10"/><span id="3val"></span><br>
+			<input id="4" type="range" min="10" max="50" step="10"/><span id="4val"></span><br>
+			<input id="5" type="range" min="10" max="50" step="10"/><span id="5val"></span><br>
+			<input id="6" type="range" min="10" max="50" step="10"/><span id="6val"></span><br>
 		</div>
-		<svg id="canvas" viewBox="-51 -51 102 102"></svg>
+		<svg id="canvas" viewBox="-62 -62 124 124"></svg>
 	</body>
 </html>
